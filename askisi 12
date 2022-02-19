@@ -1,0 +1,102 @@
+import random
+
+whitepoints=0
+blackpoints=0
+
+for k in range(100):
+    wrookx=random.randrange(8)                     #rook pos                 
+    wrooky=random.randrange(8)
+
+    goodpos=False
+    while goodpos==False:                                  
+        wbishopx=random.randrange(8)                    # bis pos and check availability
+        wbishopy=random.randrange(8)
+        if  wbishopx!=wrookx or wbishopy!=wrooky:
+            goodpos=True
+
+    goodpos=False
+    while goodpos==False:                                  #queen pos andcheck availability
+        bqueenx=random.randrange(8)                    
+        bqueeny=random.randrange(8) 
+        if wrookx!= wbishopx!=bqueenx or wrooky!= wbishopy!=bqueeny:
+            goodpos=True
+
+    if wrookx == bqueenx and ((wbishopx < wrookx and bqueenx) or (wbishopx > wrookx and bqueenx)):
+        whitepoints=whitepoints+1
+    if wrooky==bqueeny and ((wbishopy < wrooky and bqueeny) or (wbishopy > wrooky and bqueeny)):
+        whitepoints=whitepoints+1
+
+    for i in range(8):
+        if wbishopx+i==wrookx and wbishopy+i==wrooky:
+            break
+        elif wbishopx+i== bqueenx and wbishopy+i==bqueeny:
+            whitepoints=whitepoints+1
+
+    for i in range(8):
+        if wbishopx+i==wrookx and wbishopy-i==wrooky:
+            break
+        elif wbishopx+i== bqueenx and wbishopy-i==bqueeny:
+            whitepoints=whitepoints+1
+
+    for i in range(8):
+        if wbishopx-i==wrookx and wbishopy+i==wrooky:
+            break
+        elif wbishopx-i== bqueenx and wbishopy+i==bqueeny:
+            whitepoints=whitepoints+1
+
+    for i in range(8):
+        if wbishopx-i==wrookx and wbishopy-i==wrooky:
+            break
+        elif wbishopx-i== bqueenx and wbishopy-i==bqueeny:
+            whitepoints=whitepoints+1
+
+    if wrookx == wbishopx == bqueenx:
+        if wbishopx < bqueenx < wbishopx or wbishopx > bqueenx > wbishopx :
+            blackpoints=blackpoints+2
+        else:
+            blackpoints=blackpoints+1
+    elif wrookx == bqueenx:
+        blackpoints=blackpoints+1
+    elif wbishopx == bqueenx:
+        blackpoints=blackpoints+1
+
+    if wrooky == wbishopy == bqueeny:
+        if wbishopy < bqueeny < wbishopy or wbishopy > bqueeny > wbishopy :
+            blackpoints=blackpoints+2
+        else:
+            blackpoints=blackpoints+1
+    elif wrooky == bqueeny:
+        blackpoints=blackpoints+1
+    elif wbishopy == bqueeny:
+        blackpoints=blackpoints+1
+
+    bool=False
+    j=1
+    while j<9 and bool==False:
+        if (bqueenx+1==wrookx and bqueeny+i==wrooky) or (bqueenx+1==wbishopx and bqueeny+i==wbishopy):
+            bool=True
+        j=j+1
+
+    bool=False
+    j=1
+    while j<9 and bool==False:
+        if (bqueenx-1==wrookx and bqueeny+i==wrooky) or (bqueenx-1==wbishopx and bqueeny+i==wbishopy):
+            bool=True
+        j=j+1
+
+    bool=False
+    j=1
+    while j<9 and bool==False:
+        if (bqueenx+1==wrookx and bqueeny-i==wrooky) or (bqueenx+1==wbishopx and bqueeny-i==wbishopy):
+            bool=True
+        j=j+1
+
+    bool=False
+    j=1
+    while j<9 and bool==False:
+        if (bqueenx-1==wrookx and bqueeny-i==wrooky) or (bqueenx-1==wbishopx and bqueeny-i==wbishopy):
+            bool=True
+        j=j+1
+
+print(whitepoints)
+print(blackpoints)
